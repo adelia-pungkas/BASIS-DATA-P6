@@ -1,0 +1,26 @@
+1. Pelajari DFD dan Buat List Kebutuhan DD, DQL, dan DML
+A. Penerapan DFD terhadap Project Database
+DFD (Data Flow Diagram) menggambarkan aliran data dalam sistem, termasuk proses, input, output, dan penyimpanan data. Berikut adalah proses yang dibutuhkan berdasarkan Social Matching Platform:
+
+Proses dalam DFD:
+Proses Registrasi Pengguna
+
+Input: Nama, email, password, dan informasi MBTI pengguna.
+Proses: Menyimpan data pengguna baru.
+Output: Konfirmasi pendaftaran berhasil.
+Kebutuhan DDL: Tabel users untuk menyimpan data pengguna (id, nama, email, password, mbti).
+Kebutuhan DQL: Query untuk memilih data pengguna berdasarkan kriteria tertentu (misal: berdasarkan email).
+Kebutuhan DML: Query untuk menambah data pengguna baru ke tabel users.
+Proses Pencarian Teman Berdasarkan MBTI
+
+Input: Tipe MBTI yang dipilih oleh pengguna.
+Proses: Menampilkan pengguna yang memiliki tipe MBTI yang sesuai.
+Output: Daftar pengguna yang memiliki tipe MBTI serupa.
+Kebutuhan DQL: Query untuk mencari teman berdasarkan tipe MBTI pengguna.
+Kebutuhan DML: Tidak ada perubahan data, hanya query pencarian.
+Proses Pembaruan Profil Pengguna
+
+Input: Pembaruan informasi pengguna (nama, email, MBTI).
+Proses: Menyimpan perubahan data profil.
+Output: Konfirmasi profil berhasil diperbarui.
+Kebutuhan DML: Query untuk memperbarui data pengguna di tabel users.
