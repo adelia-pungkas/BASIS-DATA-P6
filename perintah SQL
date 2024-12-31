@@ -1,0 +1,46 @@
+A. DDL (Data Definition Language) - Membuat Tabel
+
+sql
+Salin kode
+CREATE TABLE mbti_types (
+    mbti_id INT PRIMARY KEY AUTO_INCREMENT,
+    mbti_type VARCHAR(4) NOT NULL
+);
+
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    mbti_type_id INT,
+    FOREIGN KEY (mbti_type_id) REFERENCES mbti_types(mbti_id)
+);
+B. DQL (Data Query Language)
+
+Query untuk Mencari Teman Berdasarkan MBTI
+
+
+SELECT u.user_id, u.name, u.email, u.mbti_type_id 
+FROM users u 
+WHERE u.mbti_type_id = ?;
+Query untuk Memilih Pengguna Berdasarkan Email (Misalnya)
+
+
+SELECT * FROM users WHERE email = ?;
+C. DML (Data Manipulation Language)
+
+Insert Pengguna Baru
+
+
+INSERT INTO users (name, email, password, mbti_type_id) 
+VALUES (?, ?, ?, ?);
+Update Profil Pengguna
+
+
+UPDATE users 
+SET name = ?, email = ?, mbti_type_id = ? 
+WHERE user_id = ?;
+Delete Pengguna
+
+
+DELETE FROM users WHERE user_id = ?;
