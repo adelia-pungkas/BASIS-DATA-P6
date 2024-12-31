@@ -1,0 +1,121 @@
+A. Store Procedure untuk Insert Pengguna Baru
+
+DELIMITER $$
+
+CREATE PROCEDURE InsertUser(
+    IN p_name VARCHAR(100),
+    IN p_email VARCHAR(100),
+    IN p_password VARCHAR(255),
+    IN p_mbti_type_id INT
+)
+BEGIN
+    INSERT INTO users (name, email, password, mbti_type_id) 
+    VALUES (p_name, p_email, p_password, p_mbti_type_id);
+END $$
+
+DELIMITER ;
+B. Store Procedure untuk Update Profil Pengguna
+
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateUserProfile(
+    IN p_user_id INT,
+    IN p_name VARCHAR(100),
+    IN p_email VARCHAR(100),
+    IN p_mbti_type_id INT
+)
+BEGIN
+    UPDATE users 
+    SET name = p_name, email = p_email, mbti_type_id = p_mbti_type_id 
+    WHERE user_id = p_user_id;
+END $$
+
+DELIMITER ;
+C. Store Procedure untuk Menghapus Pengguna
+
+DELIMITER $$
+
+CREATE PROCEDURE DeleteUser(
+    IN p_user_id INT
+)
+BEGIN
+    DELETE FROM users WHERE user_id = p_user_id;
+END $$
+
+DELIMITER ;
+4. Script Lengkap untuk Query
+DDL Script
+
+CREATE TABLE mbti_types (
+    mbti_id INT PRIMARY KEY AUTO_INCREMENT,
+    mbti_type VARCHAR(4) NOT NULL
+);
+
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    mbti_type_id INT,
+    FOREIGN KEY (mbti_type_id) REFERENCES mbti_types(mbti_id)
+);
+DQL Script
+
+SELECT u.user_id, u.name, u.email, u.mbti_type_id 
+FROM users u 
+WHERE u.mbti_type_id = ?;
+DML Script
+
+INSERT INTO users (name, email, password, mbti_type_id) 
+VALUES (?, ?, ?, ?);
+
+UPDATE users 
+SET name = ?, email = ?, mbti_type_id = ? 
+WHERE user_id = ?;
+
+DELETE FROM users WHERE user_id = ?;
+Store Procedure Script
+
+
+DELIMITER $$
+
+CREATE PROCEDURE InsertUser(
+    IN p_name VARCHAR(100),
+    IN p_email VARCHAR(100),
+    IN p_password VARCHAR(255),
+    IN p_mbti_type_id INT
+)
+BEGIN
+    INSERT INTO users (name, email, password, mbti_type_id) 
+    VALUES (p_name, p_email, p_password, p_mbti_type_id);
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE UpdateUserProfile(
+    IN p_user_id INT,
+    IN p_name VARCHAR(100),
+    IN p_email VARCHAR(100),
+    IN p_mbti_type_id INT
+)
+BEGIN
+    UPDATE users 
+    SET name = p_name, email = p_email, mbti_type_id = p_mbti_type_id 
+    WHERE user_id = p_user_id;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE PROCEDURE DeleteUser(
+    IN p_user_id INT
+)
+BEGIN
+    DELETE FROM users WHERE user_id = p_user_id;
+END $$
+
+DELIMITER ;
